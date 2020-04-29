@@ -12,6 +12,7 @@ public class SList {
 
   private SListNode head;
   private int size;
+  private SListNode fast;
 
   /**
    *  SList() constructs an empty list.
@@ -112,8 +113,15 @@ public class SList {
 
   public void squish() {
     // Fill in your solution here.  (Ours is eleven lines long.)
+    SListNode slow = head;
+    SListNode cur = head;
+    while (cur != null) {
+      while (cur.next != null && cur.item.equals(cur.next.item) ) {
+        cur.next = cur.next.next;
+      }
+      cur = cur.next;
+    }
   }
-
   /**
    *  twin() takes this list and doubles its length by replacing each node
    *  with two consecutive nodes referencing the same item.
@@ -127,6 +135,12 @@ public class SList {
 
   public void twin() {
     // Fill in your solution here.  (Ours is seven lines long.)
+    SListNode cur = head;
+    while (cur!=null){
+      SListNode tmp = cur.next;
+      cur.next = new SListNode(cur.item,tmp);
+      cur = cur.next.next;
+    }
   }
 
   /**
